@@ -1,1 +1,16 @@
-<p>em-minesweep-menu works!</p>
+<div *ngIf="displayMenu">
+
+    <h1>MINESWEEP</h1>
+
+    <div>
+        <p>Select Difficulty</p>
+        <mat-radio-group [(ngModel)]="difficulty">
+            <mat-radio-button value="beginner">Beginner</mat-radio-button>
+            <mat-radio-button value="intermediate">Intermediate</mat-radio-button>
+            <mat-radio-button value="advanced">Advanced</mat-radio-button>            
+        </mat-radio-group>
+
+        <button mat-raised-button color="primary" (click)="onStartGame()" >LETS PLAY</button>
+    </div>
+
+</div>
