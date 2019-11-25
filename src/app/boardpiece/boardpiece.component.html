@@ -1,4 +1,6 @@
-<div class="board-piece">
-    <h1 *ngIf="hasBomb">B</h1>
-    <h1 *ngIf="!hasBomb && adjacentCount">{{adjacentCount}}</h1>
+<div class="game-piece" (click)="onClick()">
+    <div class="piece-content" *ngIf="clicked">
+        <h1 *ngIf="hasBomb">B</h1>
+        <h1 *ngIf="adjacentCount">{{adjacentCount}}</h1>
+    </div>
 </div>

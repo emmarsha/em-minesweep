@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-boardpiece',
@@ -14,12 +14,23 @@ export class BoardpieceComponent implements OnInit {
   @Input() row = 0;
 
   @Input() column = 0;
-  
-  public clicked = false;  
+
+  @Input() clicked = false;
+
+  @Output() clickedAMine: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onClick() {
+    if (this.hasBomb) {
+      this.clickedAMine.emit();
+      return;
+    }
+
+    this.clicked = true;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 // -- Peers --
 import { BoardPiece } from '../boardpiece/boardpiece';
@@ -8,16 +8,38 @@ import { BoardPiece } from '../boardpiece/boardpiece';
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.css']
 })
-export class GameboardComponent implements OnInit, OnChanges {
+export class GameboardComponent implements OnInit {
 
   @Input() gamePieces: BoardPiece[] = [];
+
+  @Output() reset: EventEmitter<any> = new EventEmitter();
+
+  @Output() returnToMenu: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  ngOnChanges() {
+  onReset() {
+    this.reset.emit();
+  }
+
+  onReturnToMenu() {
+    this.returnToMenu.emit();
+  }
+
+  setBoardVisible(visibility: boolean) {
+    const pieces = this.gamePieces.map(gamePiece => {
+      gamePiece.clicked = visibility;
+      return gamePiece;
+    });
+
+    this.gamePieces = pieces;
+  }
+
+  gameOver() {
+    this.setBoardVisible(true);
   }
 
 }

@@ -1,9 +1,18 @@
 <div class="game-board">
 
-    <div class="board-menu">Menu Stuff goes here</div>
+    <div class="board-menu">
+        <button mat-raised-button color="primary" (click)="onReset()" >Reset</button>
+        <button mat-raised-button color="primary" (click)="onReturnToMenu()" >Return to menu</button>
+        <button mat-raised-button color="primary" (click)="ToggleVisibility()" >Toggle Visibility</button>
+    </div>
 
     <div class="game-container">
-        <app-boardpiece *ngFor="let piece of gamePieces" [adjacentCount]="piece.adjacentCount" [hasBomb]="piece.hasBomb"></app-boardpiece>
+        <app-boardpiece *ngFor="let piece of gamePieces" 
+            [adjacentCount]="piece.adjacentCount"
+            [hasBomb]="piece.hasBomb"
+            [clicked]="piece.clicked"
+            (clickedAMine)="gameOver()">
+        </app-boardpiece>
     </div>
 
 </div>

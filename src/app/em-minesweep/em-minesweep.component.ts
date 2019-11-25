@@ -130,4 +130,26 @@ export class EmMinesweepComponent implements OnInit {
     boardPiece.adjacentCount = mineCount;
   }
 
+  /*
+  * Reset the board with fresh randomized values
+  */
+  reset() {
+
+    this.clearBoard();
+
+    this.buildBoard();
+    this.placeMines();
+    this.setAdjacentMinesCount();
+  }
+
+  returnToMenu() {
+    this.clearBoard();
+    this.displayMenu = true;
+  }
+
+  clearBoard() {
+    this.gamePieces = [];
+    this.gamePiecePool = {};  
+  }
+
 }
