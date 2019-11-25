@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // -- Peers --
-import { BoardPiece } from '../boardpiece/boardpiece';
+import { GamePiece } from '../game-piece/game-piece';
 
 @Component({
   selector: 'app-em-minesweep',
@@ -63,7 +63,7 @@ export class EmMinesweepComponent implements OnInit {
     for (let row = 1; row <= this.selected.rowCount; row++) {
 
       for (let column = 1; column <= this.selected.colCount; column++) {
-          const newPiece = new BoardPiece(row, column);
+          const newPiece = new GamePiece(row, column);
 
           pieces.push(newPiece);
 
@@ -101,8 +101,8 @@ export class EmMinesweepComponent implements OnInit {
   */
   private setAdjacentMinesCount() {
 
-    this.gamePieces.forEach(BoardPiece => {
-      this.countMines(BoardPiece);
+    this.gamePieces.forEach(gamePiece => {
+      this.countMines(gamePiece);
     });
 
   }
@@ -110,14 +110,14 @@ export class EmMinesweepComponent implements OnInit {
   /*
   * Check for mines directly next to a given game piece
   */
-  private countMines(boardPiece: BoardPiece) {
+  private countMines(gamePiece: GamePiece) {
     let mineCount = 0;
 
-    let rowStart = (boardPiece.row - 1) < 1  ? 1 : boardPiece.row - 1;
-    let rowEnd = (boardPiece.row + 1) > this.selected.rowCount  ? this.selected.rowCount : boardPiece.row + 1;
+    let rowStart = (gamePiece.row - 1) < 1  ? 1 : gamePiece.row - 1;
+    let rowEnd = (gamePiece.row + 1) > this.selected.rowCount  ? this.selected.rowCount : gamePiece.row + 1;
     
-    let colStart = (boardPiece.column - 1) < 1  ? 1 : boardPiece.column - 1;
-    let colEnd = (boardPiece.column + 1) > this.selected.colCount  ? this.selected.colCount : boardPiece.column + 1;
+    let colStart = (gamePiece.column - 1) < 1  ? 1 : gamePiece.column - 1;
+    let colEnd = (gamePiece.column + 1) > this.selected.colCount  ? this.selected.colCount : gamePiece.column + 1;
 
     for (let row = rowStart; row <= rowEnd; row++) {
       for (let column = colStart; column <= colEnd; column++) {
@@ -127,7 +127,7 @@ export class EmMinesweepComponent implements OnInit {
       }
     }
 
-    boardPiece.adjacentCount = mineCount;
+    gamePiece.adjacentCount = mineCount;
   }
 
   /*

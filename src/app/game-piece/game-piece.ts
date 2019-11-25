@@ -1,4 +1,4 @@
-export class BoardPiece {
+export class GamePiece {
 
     public row: number;
 
