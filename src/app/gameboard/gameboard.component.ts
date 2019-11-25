@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 // -- Peers --
 import { BoardPiece } from '../boardpiece/boardpiece';
+import { TimerComponent } from '../timer/timer.component';
 
 @Component({
   selector: 'app-gameboard',
@@ -16,6 +17,8 @@ export class GameboardComponent implements OnInit {
 
   @Output() returnToMenu: EventEmitter<any> = new EventEmitter();
 
+  @ViewChild('gameTimer', {static: false}) gameTimer : TimerComponent;
+
   constructor() { }
 
   ngOnInit() {
@@ -23,6 +26,7 @@ export class GameboardComponent implements OnInit {
 
   onReset() {
     this.reset.emit();
+    this.gameTimer.resetTimer();
   }
 
   onReturnToMenu() {
@@ -39,6 +43,7 @@ export class GameboardComponent implements OnInit {
   }
 
   gameOver() {
+    this.gameTimer.stopTimer();
     this.setBoardVisible(true);
   }
 

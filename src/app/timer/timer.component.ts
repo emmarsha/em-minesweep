@@ -7,9 +7,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
+  currentTime = 0;
+
+  interval = null;
+
   constructor() { }
 
   ngOnInit() {
+    this.startTimer();
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.currentTime++;
+    },1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.interval);
+  }
+
+  clearTimer() {
+    this.currentTime = 0;
+  }
+
+  resetTimer() {
+    this.clearTimer();
+    this.startTimer();
   }
 
 }
