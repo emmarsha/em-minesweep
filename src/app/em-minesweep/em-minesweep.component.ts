@@ -20,18 +20,18 @@ export class EmMinesweepComponent implements OnInit {
 
   levels = {
     'beginner' : {
-      'height': 9,
-      'width': 9,
+      'colCount': 9,
+      'rowCount': 9,
       'mineCount': 10
     },
     'intermediate' : {
-      'height': 16,
-      'width': 16,
+      'colCount': 16,
+      'rowCount': 16,
       'mineCount': 40
     },
     'advanced' : {
-      'height': 24,
-      'width': 24,
+      'colCount': 24,
+      'rowCount': 24,
       'mineCount': 80
     },        
   }
@@ -48,10 +48,9 @@ export class EmMinesweepComponent implements OnInit {
     this.selected = this.levels[difficulty];
     this.buildBoard();
     this.placeMines();
+    this.setAdjacentMinesCount();
 
     this.displayMenu = false;
-
-    console.log(this.gamePieces);
   }
 
   /*
@@ -59,12 +58,11 @@ export class EmMinesweepComponent implements OnInit {
   */ 
   buildBoard() {
 
-    console.log('building - EM');
     const pieces = []
 
-    for (let row = 1; row <= this.selected.width; row++) {
+    for (let row = 1; row <= this.selected.rowCount; row++) {
 
-      for (let column = 1; column <= this.selected.height; column++) {
+      for (let column = 1; column <= this.selected.colCount; column++) {
           const newPiece = new BoardPiece(row, column);
 
           pieces.push(newPiece);
@@ -77,28 +75,59 @@ export class EmMinesweepComponent implements OnInit {
     }
 
     this.gamePieces = pieces;
-
   }
 
+  /*
+  * Place the mines on the board
+  */ 
   placeMines() {
-
-    console.log('placing - EM');
 
     let placedCount = 0;
 
     while (placedCount !== this.selected.mineCount) {
 
-      const row = Math.floor(Math.random() * (this.selected.width - 1) + 1);
-      const column = Math.floor(Math.random() * (this.selected.height - 1) + 1);
+      const row = Math.floor(Math.random() * (this.selected.rowCount - 1) + 1);
+      const column = Math.floor(Math.random() * (this.selected.colCount - 1) + 1);
 
       if (!this.gamePiecePool[row][column].hasBomb) {
         this.gamePiecePool[row][column].hasBomb = true;
-        console.log('bomb placed - EM');
         placedCount++;
       }
     }
   }
 
+  /*
+  * Get the count of mines surrounding each board piece
+  */
+  private setAdjacentMinesCount() {
 
+    this.gamePieces.forEach(BoardPiece => {
+      this.countMines(BoardPiece);
+    });
+
+  }
+
+  /*
+  * Check for mines directly next to a given game piece
+  */
+  private countMines(boardPiece: BoardPiece) {
+    let mineCount = 0;
+
+    let rowStart = (boardPiece.row - 1) < 1  ? 1 : boardPiece.row - 1;
+    let rowEnd = (boardPiece.row + 1) > this.selected.rowCount  ? this.selected.rowCount : boardPiece.row + 1;
+    
+    let colStart = (boardPiece.column - 1) < 1  ? 1 : boardPiece.column - 1;
+    let colEnd = (boardPiece.column + 1) > this.selected.colCount  ? this.selected.colCount : boardPiece.column + 1;
+
+    for (let row = rowStart; row <= rowEnd; row++) {
+      for (let column = colStart; column <= colEnd; column++) {
+        if (this.gamePiecePool[row][column].hasBomb) {
+          mineCount++;
+        }
+      }
+    }
+
+    boardPiece.adjacentCount = mineCount;
+  }
 
 }
