@@ -1,1 +1,9 @@
-<p>gameboard works!</p>
+<div class="game-board">
+
+    <div class="board-menu">Menu Stuff goes here</div>
+
+    <div class="game-container">
+        <app-boardpiece *ngFor="let piece of gamePieces" [adjacentCount]="piece.adjacentCount" [hasBomb]="piece.hasBomb"></app-boardpiece>
+    </div>
+
+</div>

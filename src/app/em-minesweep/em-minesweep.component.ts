@@ -20,19 +20,19 @@ export class EmMinesweepComponent implements OnInit {
 
   levels = {
     'beginner' : {
-      'height': 16,
-      'width': 16,
-      'mineCount': 6
+      'height': 9,
+      'width': 9,
+      'mineCount': 10
     },
     'intermediate' : {
-      'height': 32,
-      'width': 32,
-      'mineCount': 12
+      'height': 16,
+      'width': 16,
+      'mineCount': 40
     },
     'advanced' : {
-      'height': 64,
-      'width': 64,
-      'mineCount': 32
+      'height': 24,
+      'width': 24,
+      'mineCount': 80
     },        
   }
 
@@ -49,6 +49,8 @@ export class EmMinesweepComponent implements OnInit {
     this.buildBoard();
     this.placeMines();
 
+    this.displayMenu = false;
+
     console.log(this.gamePieces);
   }
 
@@ -58,13 +60,14 @@ export class EmMinesweepComponent implements OnInit {
   buildBoard() {
 
     console.log('building - EM');
+    const pieces = []
 
     for (let row = 1; row <= this.selected.width; row++) {
 
       for (let column = 1; column <= this.selected.height; column++) {
           const newPiece = new BoardPiece(row, column);
 
-          this.gamePieces.push(newPiece);
+          pieces.push(newPiece);
 
           if (!this.gamePiecePool[row]) {
             this.gamePiecePool[row] = {};
@@ -72,6 +75,9 @@ export class EmMinesweepComponent implements OnInit {
           this.gamePiecePool[row][column] = newPiece;
       }
     }
+
+    this.gamePieces = pieces;
+
   }
 
   placeMines() {

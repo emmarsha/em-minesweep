@@ -1,1 +1,4 @@
-<p>boardpiece works!</p>
+<div class="board-piece">
+    <h1 *ngIf="hasBomb">B</h1>
+    <h1 *ngIf="adjacentCount">{{adjacentCount}}</h1>
+</div>

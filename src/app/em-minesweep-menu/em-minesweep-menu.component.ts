@@ -7,8 +7,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class EmMinesweepMenuComponent implements OnInit {
 
-  @Input() displayMenu = false;
-
   @Output() startGame: EventEmitter<any> = new EventEmitter();
 
   difficulty: string = 'beginner';
