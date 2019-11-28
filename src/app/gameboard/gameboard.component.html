@@ -8,12 +8,13 @@
     </div>
 
     <div class="game-container">
-        <app-boardpiece *ngFor="let piece of gamePieces" 
-            [adjacentCount]="piece.adjacentCount"
-            [hasBomb]="piece.hasBomb"
-            [clicked]="piece.clicked"
-            (clickedAMine)="gameOver()">
-        </app-boardpiece>
+        <app-game-piece *ngFor="let gamePiece of gamePieces" 
+            [hasBomb]="gamePiece.hasBomb"
+            [clicked]="gamePiece.clicked"
+            [gamePiece]="gamePiece"
+            (clickedAMine)="gameOver()"
+            (clickedABlank)="showAdjacentOpen($event)">
+        </app-game-piece>
     </div>
 
 </div>
