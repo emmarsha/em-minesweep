@@ -10,6 +10,8 @@ export class GamePiece {
     
     public clicked = false;
     
+    public flagPlaced = false;
+    
     constructor(row: number, column: number) {
         
         this.row = row;

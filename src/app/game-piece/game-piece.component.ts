@@ -16,11 +16,27 @@ export class GamePieceComponent implements OnInit {
 
   @Input() clicked = false;
 
+  @Input() flagPlaced = false;
+
   @Output() clickedAMine: EventEmitter<any> = new EventEmitter();
 
   @Output() clickedABlank: EventEmitter<any> = new EventEmitter();
 
-  adjacentCount = 0
+  adjacentCount = 0;
+
+  // 0, 1, 2
+  flagLevel = 0;
+
+  countColors = {
+    1: 'blue',
+    2: 'green',
+    3: 'red',
+    4: 'navy',
+    5: 'purple',
+    6: 'orange',
+    7: 'yellow',
+    8: 'violet'
+  };
 
   constructor() { }
 
@@ -29,6 +45,11 @@ export class GamePieceComponent implements OnInit {
   }
 
   onClick() {
+
+    if (this.flagPlaced) {
+      return;
+    }
+
     if (this.hasBomb) {
       this.clickedAMine.emit();
       return;
@@ -41,6 +62,28 @@ export class GamePieceComponent implements OnInit {
     this.clicked = true;
   }
 
+  placeFlag() {
+    if (this.clicked) {
+      return false;
+    }
 
+    this.flagPlaced = true;
+    this.updateFlagClick();
+
+    return false;
+  }
+
+  updateFlagClick() {
+    this.flagLevel++;
+
+    if (this.flagLevel > 2) {
+      this.flagLevel = 0;
+      this.flagPlaced = false;
+    }
+  }
+
+  getCountColor() {
+    return this.countColors[this.adjacentCount];
+  }
 
 }

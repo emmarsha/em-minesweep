@@ -42,6 +42,7 @@ export class GameboardComponent implements OnInit {
 
   setBoardVisible(visibility: boolean) {
     const pieces = this.gamePieces.map(gamePiece => {
+      gamePiece.flagPlaced = false;
       gamePiece.clicked = visibility;
       return gamePiece;
     });
@@ -66,8 +67,8 @@ export class GameboardComponent implements OnInit {
 
     const gamePiece = this.piecePool[row][column];
 
-    // Already clicked or has a bomb
-    if (gamePiece.clicked || gamePiece.hasBomb ) {
+    // Already clicked, has a bomb or a flag
+    if (gamePiece.clicked || gamePiece.hasBomb || gamePiece.flagPlaced) {
       return;
     }
 

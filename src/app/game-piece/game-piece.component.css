@@ -9,7 +9,14 @@
     border: .5px solid black;
     height: 35px;
     width: 35px;
+}
 
+i.fa-bomb {
+    padding: 8px;
+}
+
+i.fa-flag {
+    padding: 9px 6px;
 }
 
 h1 {

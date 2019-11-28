@@ -1,8 +1,7 @@
 <div class="game-piece" [ngClass]="clicked ? 'clicked' : ''" (click)="onClick()" (contextmenu)="placeFlag()">
-    <h1 class="flag" *ngIf="flagPlaced" [style.color]="flagLevel === 1 ? 'red' : 'blue'" >F</h1>
+    <i class="fa fa-flag fa-lg" *ngIf="flagPlaced" [style.color]="flagLevel === 1 ? 'red' : 'blue'" aria-hidden="true"></i>
     <div class="piece-content" *ngIf="clicked">
-        <h1 *ngIf="hasBomb">B</h1>
-        <h1 *ngIf="adjacentCount">{{adjacentCount}}</h1>
+        <i class="fa fa-bomb fa-lg" *ngIf="hasBomb" aria-hidden="true"></i>
+        <h1 *ngIf="adjacentCount && !hasBomb && !hasFlag" [style.color]="getCountColor()">{{adjacentCount}}</h1>
     </div>
 </div>
-
