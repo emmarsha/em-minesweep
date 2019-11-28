@@ -23,9 +23,12 @@ export class GameboardComponent implements OnInit {
 
   @ViewChild('gameTimer', {static: false}) gameTimer : TimerComponent;
 
+  boardWidth = 0;
+
   constructor() { }
 
   ngOnInit() {
+    this.boardWidth = this.gameInfo.boardWidth;
   }
 
   onReset() {

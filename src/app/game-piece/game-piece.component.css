@@ -1,16 +1,24 @@
 .game-piece {
     height: 30px;
     width: 30px;
-    border: 2px solid black;
+    border-style: outset;
     background-color: lightseagreen;
 }
 
-.piece-content{
-    height: 30px;
-    width: 30px;
-    background-color: lightsalmon;
+.game-piece.clicked {
+    border: .5px solid black;
+    height: 35px;
+    width: 35px;
+
 }
 
 h1 {
     margin: 0;
+    text-align: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
 }

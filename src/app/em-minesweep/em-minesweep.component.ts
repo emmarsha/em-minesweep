@@ -22,17 +22,20 @@ export class EmMinesweepComponent implements OnInit {
     'beginner' : {
       'colCount': 9,
       'rowCount': 9,
-      'mineCount': 10
+      'mineCount': 10,
+      'boardWidth': '324px'
     },
     'intermediate' : {
       'colCount': 16,
       'rowCount': 16,
-      'mineCount': 40
+      'mineCount': 40,
+      'boardWidth': '577px'
     },
     'advanced' : {
       'colCount': 24,
       'rowCount': 24,
-      'mineCount': 80
+      'mineCount': 80,
+      'boardWidth': '899px'
     },        
   }
 
