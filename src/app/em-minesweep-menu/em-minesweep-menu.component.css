@@ -1,0 +1,45 @@
+.menu {
+    padding: 35px;
+}
+
+.game-title {
+    display: flex;
+    justify-content: center;
+}
+
+.title-icon {
+    padding: 0 3px;
+}
+
+.title-icon.fa-flag {
+    padding-top: 5px;
+}
+
+.title {
+    text-align: center;
+    margin: 0;
+}
+
+.difficulty-content {
+    display: flex;
+    justify-content: center;
+}
+
+.difficulty-title {
+    text-align: center;
+}
+
+.selections {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.selection {
+    margin: 5px;
+}
+
+.start-game-btn {
+    display: block;
+    margin: auto;
+}

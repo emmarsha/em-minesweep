@@ -2,11 +2,11 @@
     height: 30px;
     width: 30px;
     border-style: outset;
-    background-color: lightseagreen;
+    background-color: #BDBDBD;
 }
 
 .game-piece.clicked {
-    border: .5px solid black;
+    border: .5px solid #7F7F7F;
     height: 35px;
     width: 35px;
 }

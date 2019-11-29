@@ -1,0 +1,7 @@
+.em-minesweep {
+    border-style: outset;
+    background-color: gainsboro;
+    display: inline-block;
+    min-width: 345px;
+    min-height: 345px;
+}

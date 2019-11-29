@@ -1,16 +1,46 @@
-<div>
+<div class="menu">
 
-    <h1>MINESWEEP</h1>
+    <div class="game-title">
+        <i class="fa fa-bomb fa-2x title-icon"aria-hidden="true"></i>
+        <h1 class="title">MINESWEEP</h1>
+        <i class="fa fa-flag fa-2x title-icon" aria-hidden="true"></i>
+    </div>
 
     <div>
-        <p>Select Difficulty</p>
-        <mat-radio-group [(ngModel)]="difficulty">
-            <mat-radio-button value="beginner">Beginner</mat-radio-button>
-            <mat-radio-button value="intermediate">Intermediate</mat-radio-button>
-            <mat-radio-button value="advanced">Advanced</mat-radio-button>            
-        </mat-radio-group>
+        <h3 class="difficulty-title">Select Difficulty</h3>
+        <div class="difficulty-content">
+            <mat-radio-group class="selections" [(ngModel)]="difficulty">
+                <mat-radio-button class="selection" value="beginner">Beginner</mat-radio-button>
+                <mat-radio-button class="selection" value="intermediate">Intermediate</mat-radio-button>
+                <mat-radio-button class="selection" value="advanced">Advanced</mat-radio-button>            
+            </mat-radio-group>
 
-        <button mat-raised-button color="primary" (click)="onStartGame()" >LETS PLAY</button>
+            <table>
+                <tr>
+                <th>Height</th>
+                <th>Width</th>
+                <th>Mines</th>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>            
+                <tr>
+                <td>16</td>
+                <td>16</td>
+                <td>40</td>
+                </tr>
+                <tr>
+                <td>24</td>
+                <td>24</td>
+                <td>80</td>
+                </tr>
+            </table>
+
+        </div>  
+
+        <button mat-flat-button class="start-game-btn" (click)="onStartGame()" >LETS PLAY</button>
     </div>
 
 </div>

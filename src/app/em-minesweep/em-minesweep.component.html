@@ -1,9 +1,17 @@
-<app-em-minesweep-menu  *ngIf="displayMenu" (startGame)="startGame($event)"></app-em-minesweep-menu>
-<app-gameboard 
-    *ngIf="!displayMenu"
-    [gamePieces]="gamePieces"
-    [piecePool]="gamePiecePool"
-    [gameInfo]="selected"
-    (reset)="reset($event)"
-    (returnToMenu)="returnToMenu()">
-</app-gameboard>
+<div class="em-minesweep">
+
+    <app-em-minesweep-menu
+        *ngIf="displayMenu"
+        (startGame)="startGame($event)">
+    </app-em-minesweep-menu>
+
+    <app-gameboard 
+        *ngIf="!displayMenu"
+        [gamePieces]="gamePieces"
+        [piecePool]="gamePiecePool"
+        [gameInfo]="selected"
+        (reset)="reset($event)"
+        (returnToMenu)="returnToMenu()">
+    </app-gameboard>
+
+</div>
