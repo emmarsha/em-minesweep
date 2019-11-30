@@ -1,9 +1,10 @@
 <div class="game-board" >
 
     <div class="board-menu">
+        <h1 class="flag-count">{{flagsToPlace}}</h1>
         <button mat-raised-button (click)="onReset()" >Reset</button>
         <button mat-raised-button (click)="onReturnToMenu()" >Return to menu</button>
-        <app-timer #gameTimer></app-timer>
+        <app-timer class="timer" #gameTimer></app-timer>
     </div>
 
     <div class="game-container" [style.width]="boardWidth">
@@ -11,8 +12,9 @@
             [hasBomb]="gamePiece.hasBomb"
             [triggeredBomb]="gamePiece.triggeredBomb"
             [clicked]="gamePiece.clicked"
-            [flagPlaced]="gamePiece.flagPlaced"
+            [flagged]="gamePiece.flagged"
             [gamePiece]="gamePiece"
+            (updateFlagCount)="onFlagPlaced($event)"
             (pieceClicked)="onPieceClicked($event)">
         </app-game-piece>
     </div>

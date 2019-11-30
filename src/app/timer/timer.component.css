@@ -1,7 +1,4 @@
 .timer-container {
-    display: inline-block;
-    height: 20px;
-    width: 60px;
-    border: 2px solid black;
-    margin: 5px;
+    margin: 0;
+    float: right;
 }

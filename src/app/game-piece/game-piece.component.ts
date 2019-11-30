@@ -18,7 +18,9 @@ export class GamePieceComponent implements OnInit {
 
   @Input() clicked = false;
 
-  @Input() flagPlaced = false;
+  @Input() flagged = false;
+
+  @Output() updateFlagCount: EventEmitter<any> = new EventEmitter();
 
   @Output() pieceClicked: EventEmitter<any> = new EventEmitter();
 
@@ -46,7 +48,7 @@ export class GamePieceComponent implements OnInit {
 
   onClick() {
 
-    if (this.flagPlaced) {
+    if (this.flagged) {
       return;
     }
 
@@ -55,12 +57,13 @@ export class GamePieceComponent implements OnInit {
 
   placeFlag() {
     if (this.clicked) {
-      return false;
+      return;
     }
 
-    this.flagPlaced = true;
+    this.flagged = true;
     this.updateFlagClick();
 
+    // Return false to prevent context menu from poping up
     return false;
   }
 
@@ -69,8 +72,15 @@ export class GamePieceComponent implements OnInit {
 
     if (this.flagLevel > 2) {
       this.flagLevel = 0;
-      this.flagPlaced = false;
+      this.flagged = false;
+      this.updateFlagCount.emit(true);
     }
+
+    if (this.flagLevel === 1) {
+      this.updateFlagCount.emit(false);
+    }
+
+    console.log(this.flagLevel);
   }
 
   getCountColor() {

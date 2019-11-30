@@ -27,10 +27,13 @@ export class GameBoardComponent implements OnInit {
 
   spacesLeftToClear = 0;
 
+  flagsToPlace = 0;
+
   constructor() { }
 
   ngOnInit() {
     this.boardWidth = this.gameInfo.boardWidth;
+    this.flagsToPlace = this.gameInfo.mineCount;
     this.spacesLeftToClear = (this.gameInfo.rowCount * this.gameInfo.colCount) - this.gameInfo.mineCount;
   }
 
@@ -52,6 +55,14 @@ export class GameBoardComponent implements OnInit {
 
     gamePiece.clicked = true;
     this.checkClearCount();
+  }
+
+  onFlagPlaced(addFlag: boolean) {
+    if (this.flagsToPlace === 0) {
+      return;
+    }
+
+    addFlag ? this.flagsToPlace++ : this.flagsToPlace--;
   }
 
   checkClearCount() {
@@ -76,6 +87,7 @@ export class GameBoardComponent implements OnInit {
     this.reset.emit();
     this.gameTimer.resetTimer();
     this.spacesLeftToClear = (this.gameInfo.rowCount * this.gameInfo.colCount) - this.gameInfo.mineCount;
+    this.flagsToPlace = this.gameInfo.mineCount;
   }
 
   onReturnToMenu() {
@@ -109,7 +121,7 @@ export class GameBoardComponent implements OnInit {
     const gamePiece = this.piecePool[row][column];
 
     // Already clicked, has a bomb or a flag
-    if (gamePiece.clicked || gamePiece.hasBomb || gamePiece.flagPlaced) {
+    if (gamePiece.clicked || gamePiece.hasBomb || gamePiece.flagged) {
       return;
     }
 
@@ -136,7 +148,7 @@ export class GameBoardComponent implements OnInit {
 
     const pieces = this.gamePieces.map(gamePiece => {
 
-      gamePiece.hasBomb ? gamePiece.flagPlaced = true : gamePiece.clicked = true;
+      gamePiece.hasBomb ? gamePiece.flagged = true : gamePiece.clicked = true;
 
       return gamePiece;
     });

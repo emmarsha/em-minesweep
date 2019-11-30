@@ -12,7 +12,7 @@ export class GamePiece {
     
     public clicked = false;
     
-    public flagPlaced = false;
+    public flagged = false;
     
     constructor(row: number, column: number) {
         
