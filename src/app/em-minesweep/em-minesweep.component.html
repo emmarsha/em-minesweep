@@ -5,13 +5,13 @@
         (startGame)="startGame($event)">
     </app-em-minesweep-menu>
 
-    <app-gameboard 
+    <app-game-board 
         *ngIf="!displayMenu"
         [gamePieces]="gamePieces"
         [piecePool]="gamePiecePool"
         [gameInfo]="selected"
         (reset)="reset($event)"
         (returnToMenu)="returnToMenu()">
-    </app-gameboard>
+    </app-game-board>
 
 </div>

@@ -7,6 +7,8 @@ export class GamePiece {
     public adjacentCount = 0; 
 
     public hasBomb = false;
+
+    public triggeredBomb = false;
     
     public clicked = false;
     

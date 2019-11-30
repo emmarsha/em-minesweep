@@ -9,12 +9,13 @@
     <div class="game-container" [style.width]="boardWidth">
         <app-game-piece *ngFor="let gamePiece of gamePieces" 
             [hasBomb]="gamePiece.hasBomb"
+            [triggeredBomb]="gamePiece.triggeredBomb"
             [clicked]="gamePiece.clicked"
             [flagPlaced]="gamePiece.flagPlaced"
             [gamePiece]="gamePiece"
-            (clickedAMine)="gameOver()"
-            (clickedABlank)="showAdjacentOpen($event)">
+            (pieceClicked)="onPieceClicked($event)">
         </app-game-piece>
     </div>
 
 </div>
+

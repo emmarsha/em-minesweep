@@ -12,15 +12,15 @@ export class GamePieceComponent implements OnInit {
 
   @Input() hasBomb = false;
 
+  @Input() triggeredBomb = false;
+
   @Input() gamePiece: GamePiece = null;
 
   @Input() clicked = false;
 
   @Input() flagPlaced = false;
 
-  @Output() clickedAMine: EventEmitter<any> = new EventEmitter();
-
-  @Output() clickedABlank: EventEmitter<any> = new EventEmitter();
+  @Output() pieceClicked: EventEmitter<any> = new EventEmitter();
 
   adjacentCount = 0;
 
@@ -50,16 +50,7 @@ export class GamePieceComponent implements OnInit {
       return;
     }
 
-    if (this.hasBomb) {
-      this.clickedAMine.emit();
-      return;
-    }
-
-    if (this.adjacentCount === 0) {
-      this.clickedABlank.emit(this.gamePiece);
-    }
-
-    this.clicked = true;
+    this.pieceClicked.emit(this.gamePiece);
   }
 
   placeFlag() {

@@ -5,6 +5,10 @@
     background-color: #BDBDBD;
 }
 
+.game-piece.triggered {
+    background-color: red;
+}
+
 .game-piece.clicked {
     border: .5px solid #7F7F7F;
     height: 35px;

@@ -5,11 +5,11 @@ import { GamePiece } from '../game-piece/game-piece';
 import { TimerComponent } from '../timer/timer.component';
 
 @Component({
-  selector: 'app-gameboard',
-  templateUrl: './gameboard.component.html',
-  styleUrls: ['./gameboard.component.css']
+  selector: 'app-game-board',
+  templateUrl: './game-board.component.html',
+  styleUrls: ['./game-board.component.css']
 })
-export class GameboardComponent implements OnInit {
+export class GameBoardComponent implements OnInit {
 
   @Input() gamePieces: GamePiece[] = [];
 
@@ -25,15 +25,57 @@ export class GameboardComponent implements OnInit {
 
   boardWidth = 0;
 
+  spacesLeftToClear = 0;
+
   constructor() { }
 
   ngOnInit() {
     this.boardWidth = this.gameInfo.boardWidth;
+    this.spacesLeftToClear = (this.gameInfo.rowCount * this.gameInfo.colCount) - this.gameInfo.mineCount;
+  }
+
+  onPieceClicked(gamePiece: GamePiece) {
+
+    if (gamePiece.clicked) {
+      return;
+    }
+
+    if (gamePiece.hasBomb) {
+      gamePiece.triggeredBomb = true;
+      this.gameOver();
+      return;
+    }
+
+    if (gamePiece.adjacentCount === 0) {
+      this.showAdjacentOpen(gamePiece);
+    }
+
+    gamePiece.clicked = true;
+    this.checkClearCount();
+  }
+
+  checkClearCount() {
+    let clickedCount = this.spacesLeftToClear;
+    this.gamePieces.forEach(gamePiece => {
+      if (gamePiece.clicked) {
+        clickedCount--;
+      }
+    });
+
+    if (clickedCount === 0) {
+      this.wonTheGame();
+    }
+  }
+
+  reduceClearCount() {
+    this.spacesLeftToClear--;
+    console.log(this.spacesLeftToClear);
   }
 
   onReset() {
     this.reset.emit();
     this.gameTimer.resetTimer();
+    this.spacesLeftToClear = (this.gameInfo.rowCount * this.gameInfo.colCount) - this.gameInfo.mineCount;
   }
 
   onReturnToMenu() {
@@ -42,7 +84,6 @@ export class GameboardComponent implements OnInit {
 
   setBoardVisible(visibility: boolean) {
     const pieces = this.gamePieces.map(gamePiece => {
-      gamePiece.flagPlaced = false;
       gamePiece.clicked = visibility;
       return gamePiece;
     });
@@ -73,6 +114,7 @@ export class GameboardComponent implements OnInit {
     }
 
     gamePiece.clicked = true;
+    // this.checkForWin()
 
     // Found the outer edge of the blank space
     if (gamePiece.adjacentCount > 0) {
@@ -87,6 +129,19 @@ export class GameboardComponent implements OnInit {
     this.floodFill(row - 1, column - 1);  // south west
     this.floodFill(row, column - 1);  // west
     this.floodFill(row + 1, column - 1);  // north west
+  }
+
+  wonTheGame() {
+    this.gameTimer.stopTimer();
+
+    const pieces = this.gamePieces.map(gamePiece => {
+
+      gamePiece.hasBomb ? gamePiece.flagPlaced = true : gamePiece.clicked = true;
+
+      return gamePiece;
+    });
+
+    this.gamePieces = pieces;
   }
 
 }

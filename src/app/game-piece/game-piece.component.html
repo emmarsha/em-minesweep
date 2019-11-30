@@ -1,4 +1,4 @@
-<div class="game-piece" [ngClass]="clicked ? 'clicked' : ''" (click)="onClick()" (contextmenu)="placeFlag()">
+<div class="game-piece" [ngClass]="{'clicked': clicked, 'triggered': triggeredBomb}" (click)="onClick()" (contextmenu)="placeFlag()">
     <i class="fa fa-flag fa-lg" *ngIf="flagPlaced" [style.color]="flagLevel === 1 ? 'red' : 'blue'" aria-hidden="true"></i>
     <div class="piece-content" *ngIf="clicked">
         <i class="fa fa-bomb fa-lg" *ngIf="hasBomb" aria-hidden="true"></i>
